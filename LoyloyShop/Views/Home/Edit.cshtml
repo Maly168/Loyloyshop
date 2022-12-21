@@ -1,0 +1,52 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+    @model Products
+@using (Html.BeginForm("Update", "Home", FormMethod.Post))
+    {
+        <table>
+        <tr>
+            <td>Name: </td>
+            <td>@Html.TextBoxFor(m => m.Name )</td>
+        </tr>
+        <tr>
+            <td>Type: </td>
+            <td>@Html.TextBoxFor(m => m.Type)</td>
+        </tr>
+        <tr>
+            <td>Color: </td>
+            <td>@Html.TextBoxFor(m => m.Color)</td>
+        </tr>
+         <tr>
+            <td>Engine Number: </td>
+            <td>@Html.TextBoxFor(m => m.EngineNumber)</td>
+        </tr>
+          <tr>
+            <td>Frame Number: </td>
+            <td>@Html.TextBoxFor(m => m.FrameNumber)</td>
+        </tr>
+          <tr>
+            <td>Plate Number: </td>
+            <td>@Html.TextBoxFor(m => m.PlateNumber)</td>
+        </tr>
+         <tr>
+            <td>Made Year: </td>
+            <td>@Html.TextBoxFor(m => m.MadeYear)</td>
+        </tr>
+         <tr>
+            <td>Power: </td>
+            <td>@Html.TextBoxFor(m => m.Power)</td>
+        </tr>
+        <tr>
+            <td>Price: </td>
+            <td>@Html.TextBoxFor(m => m.PriceBuy)</td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Submit Form" /></td>
+        </tr>
+    </table>
+    }
+
+}
