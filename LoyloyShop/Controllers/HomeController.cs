@@ -1,5 +1,4 @@
 ﻿using LoyloyShop.Models;
-using LoyloyShop.Services;
 using LoyloyShop.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -43,6 +42,14 @@ namespace LoyloyShop.Controllers
             return View(product);
         }
 
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            var product = _motoService.GetMotoInfo(id);
+            ViewBag.Products = product;
+            return View(product);
+        }
+
         [HttpPost]
         public ActionResult Create(Products product)
         {
@@ -55,11 +62,11 @@ namespace LoyloyShop.Controllers
 
             return View();
         }
-        // [HttpPost]
-       // [AcceptVerbs(HttpMethods)]
-        public ActionResult Update(int id , FormCollection formValue)
+
+        [HttpPost]
+        public ActionResult Update(IFormCollection formValue)
         {
-            var product = _motoService.GetMotoInfo(id);
+            var product = _motoService.GetMotoInfo(int.Parse(formValue["Id"]));
             product.Name = formValue["name"];
             product.Type = formValue["type"];
             product.Color = formValue["color"];
@@ -71,7 +78,10 @@ namespace LoyloyShop.Controllers
             product.PriceBuy = decimal.Parse(formValue["PriceBuy"]);
 
             _motoService.UpdateMotoInfo(product);
-            return View();
+
+            var products = _motoService.GetMotoInfos();
+            ViewBag.Product = products;
+            return View("~/Views/Home/Index.cshtml");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

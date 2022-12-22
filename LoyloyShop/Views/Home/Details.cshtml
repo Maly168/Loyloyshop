@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model Products
+<div class="container">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Type</th>
+        <th scope="col">Color</th>
+        <th scope="col">Engine Number</th>
+        <th scope="col">Frame Number</th>
+        <th scope="col">Plate Number</th>
+        <th scope="col">Made Year</th>
+        <th scope="col">Power</th>
+        <th scope="col">Price</th>
+        <th scope="col">Created On</th>
+        <th scope="col">Modified On</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+            <tr class="info">
+                <td>@Model.Name</td>
+                <td>@Model.Type</td>
+                <td>@Model.Color</td>
+                <td>@Model.EngineNumber</td>
+                <td>@Model.FrameNumber</td>
+                <td>@Model.PlateNumber</td>
+                <td>@Model.MadeYear</td>
+               
+                <td>@Model.Power</td>
+                <td>@Model.PriceBuy</td>
+                <td>@Model.CreatedOn</td>
+                <td>@Model.ModifiedOn</td>
+                <td>@Model.Status</td>
+              </tr>
+    </tbody>
+  </table>
+
+</div>

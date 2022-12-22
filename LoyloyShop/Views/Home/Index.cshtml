@@ -3,42 +3,32 @@
 }
 
 <div class="container">
-  <table class="table">
+  <table class="table table-bordered">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Color</th>
-        <th>Engine Number</th>
-        <th>Frame Number</th>
-        <th>Plate Number</th>
-        <th>Made Year</th>
-        <th>Power</th>
-        <th>Price-Buy</th>
-        <th>Price-Sell</th>
-        <th>Date Buy</th>
-        <th>Date Sell</th>
-        <th>Modified On</th>
-        <th>Status</th>
-        <td>Action</td>
+        <th scope="col">Name</th>
+        <th scope="col">Type</th>
+       @* <th scope="col">Color</th>
+        <th scope="col">Engine Number</th>
+        <th scope="col">Frame Number</th>
+        <th scope="col">Plate Number</th>
+        <th scope="col">Made Year</th>
+        <th scope="col">Power</th>*@
+        <th scope="col">Price</th>
+        <th scope="col">Created On</th>
+        <th scope="col">Modified On</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
       @foreach (var prod in (List<Products>)ViewBag.Product)
             {
-            <tr class="info">
+            <tr class="">
                 <td> @Html.ActionLink( @prod.Name, "UpdateProduct", "Home")</td>
                 <td>@prod.Type</td>
-                <td>@prod.Color</td>
-                 <td>@prod.EngineNumber</td>
-                <td>@prod.FrameNumber</td>
-                <td>@prod.PlateNumber</td>
-                 <td>@prod.MadeYear</td>
-                <td>@prod.Power</td>
                 <td>@prod.PriceBuy</td>
-                 <td>@prod.PriceSell</td>
                 <td>@prod.CreatedOn</td>
-                <td>@prod.DateSell</td>
                 <td>@prod.ModifiedOn</td>
                 <td>@prod.Status</td>
                 <td>
