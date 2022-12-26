@@ -8,5 +8,8 @@ namespace LoyloyShop.Services.Interface
         void StoreMotoInfo(Products product);
         void UpdateMotoInfo(Products product);
         Products GetMotoInfo(int productId);
+        List<Products> GetActiveProduct();
+        List<Products> GetSoldOutProduct();
+        Products GetProductByPlateNumber(string plateNumber);
     }
 }

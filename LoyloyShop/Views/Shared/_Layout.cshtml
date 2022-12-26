@@ -37,22 +37,32 @@
               <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                   <li class="nav-item active">
-                    <a class="nav-link"" asp-area="" asp-controller="Home" asp-action="Index">Products <span class="sr-only">(current)</span></a>
+                      @Html.ActionLink("Products", "Index", "Home", null,  new {@class = "nav-link btn" })
+                      @if (@ViewBag.Product != null)
+                        {
+                         <span class="badge badge-light">@ViewBag.Product.Count</span>
+                        }
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" asp-controller="Home" asp-action="ProductSell">Sell</a>
+                      @Html.ActionLink("SoldOut", "SoldOutProduct", "Home", null, new {@class = "nav-link" })
                   </li>
                    <li class="nav-item">
-                    <a class="nav-link" asp-controller="Home" asp-action="ProductBuy">Buy</a>
+                      @Html.ActionLink("Active Products", "ActiveProduct", "Home", null,  new {@class = "nav-link" })
                   </li>
                   <li class="nav-item">
                     <a class="nav-link disabled" href="#">Disabled</a>
                   </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
+                @using (Html.BeginForm("Search", "Home", FormMethod.Post,  new { @class="form-inline my-2 my-lg-0" }))
+                {
+                  <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search by plate number" aria-label="Search">
+                  <input type="submit" value="Search"  class="btn btn-outline-success my-2 my-sm-0"/>
+                  @*<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>*@
+                }
+                @*<form class="form-inline my-2 my-lg-0">
                   <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                   <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                </form>*@
               </div>
             </nav>
     </header>

@@ -11,6 +11,8 @@
         <th scope="col">Frame Number</th>
         <th scope="col">Plate Number</th>
         <th scope="col">Price</th>
+        <th scope="col">Sell Price</th>
+        <th scope="col">Earning</th>
         <th scope="col">Created On</th>
         <th scope="col">Modified On</th>
         <th scope="col">Status</th>
@@ -26,6 +28,8 @@
                 <td>@prod.FrameNumber</td>
                 <td>@prod.PlateNumber</td>
                 <td>@prod.PriceBuy</td>
+                <td>@(prod.PriceSell)</td>
+                <td>@(prod.PriceSell - prod.PriceBuy)</td>
                 <td>@prod.CreatedOn</td>
                 <td>@prod.ModifiedOn</td>
                 <td>@prod.Status</td>
@@ -36,7 +40,7 @@
               </tr>
             }
             <tr>
-                <td colspan="9">Total : @ViewBag.Total $</td>
+                <td colspan="9">Total Earning : @ViewBag.TotalEarning $</td>
             </tr>
     </tbody>
   </table>

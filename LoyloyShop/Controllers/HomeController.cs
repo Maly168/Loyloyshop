@@ -20,7 +20,31 @@ namespace LoyloyShop.Controllers
         {
             var product = _motoService.GetMotoInfos();
             ViewBag.Product = product;
+            ViewBag.Total = product.Sum(p =>p.PriceBuy);
             return View();
+        }
+
+        public IActionResult ActiveProduct()
+        {
+            var products = _motoService.GetActiveProduct();
+            ViewBag.Product = products;
+            ViewBag.Total = products.Sum(p => p.PriceBuy);
+            return View("~/Views/Home/Index.cshtml");
+        }
+        public IActionResult SoldOutProduct()
+        {
+            var products = _motoService.GetSoldOutProduct();
+            ViewBag.Product = products;
+            var total = products.Sum(p => p.PriceSell)  - products.Sum(p => p.PriceBuy);
+            ViewBag.TotalEarning = total;
+            return View("~/Views/Home/SoldOutProduct.cshtml");
+        }
+
+        public IActionResult Search(IFormCollection formValue)
+        {
+            var product = _motoService.GetProductByPlateNumber(formValue["search"]);
+            ViewBag.Products = product; 
+            return View(product);
         }
 
         public IActionResult Privacy()
@@ -38,7 +62,6 @@ namespace LoyloyShop.Controllers
         public IActionResult Edit(int id)
         {
             var product = _motoService.GetMotoInfo(id);
-            ViewBag.Products = product;
             return View(product);
         }
 
@@ -53,14 +76,13 @@ namespace LoyloyShop.Controllers
         [HttpPost]
         public ActionResult Create(Products product)
         {
-            ViewBag.Products = product;
+            //ViewBag.Products = product;
             _motoService.StoreMotoInfo(product);
-            //if (sm.Addon == true)
-            //    ViewBag.Addon = "Selected";
-            //else
-            //    ViewBag.Addon = "Not Selected";
 
-            return View();
+            var products = _motoService.GetMotoInfos();
+            ViewBag.Product = products;
+            ViewBag.Total = products.Sum(p => p.PriceBuy);
+            return View("~/Views/Home/Index.cshtml");
         }
 
         [HttpPost]
@@ -76,11 +98,14 @@ namespace LoyloyShop.Controllers
             product.MadeYear = int.Parse(formValue["MadeYear"]);
             product.Power = formValue["Power"];
             product.PriceBuy = decimal.Parse(formValue["PriceBuy"]);
+            product.PriceSell = decimal.Parse(formValue["PriceSell"]);
+            product.Status = int.Parse(formValue["Status"]);
 
             _motoService.UpdateMotoInfo(product);
 
             var products = _motoService.GetMotoInfos();
             ViewBag.Product = products;
+            ViewBag.Total = products.Sum(p => p.PriceBuy);
             return View("~/Views/Home/Index.cshtml");
         }
 

@@ -15,7 +15,7 @@ namespace LoyloyShop.Models
         public int? MadeYear { get; set;}
         public string Power { get; set; }
         public decimal PriceBuy { get; set; }
-        public double? PriceSell { get; set; }
+        public decimal? PriceSell { get; set; }
         public int Status { get; set; }
         public DateTime CreatedOn { get; set;}
         public DateTime? DateSell { get; set;}
