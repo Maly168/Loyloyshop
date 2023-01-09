@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\Others\LoyloyShop\LoyloyShop\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <History>True|2023-01-09T03:18:28.3610598Z;True|2023-01-09T10:17:57.7024071+07:00;True|2023-01-06T16:00:00.5083097+07:00;True|2023-01-06T15:31:43.0211580+07:00;True|2022-12-28T10:12:00.7224912+07:00;True|2022-12-28T10:05:42.2425747+07:00;</History>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="loyloyshopdb">
+      <Value>Data Source=.\Local%3bInitial Catalog=loyloyshopdb%3bPersist Security Info=True%3bUser ID=sa%3bPassword=123456%3bPooling=true%3bmin pool size=4%3bmax pool size=32%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

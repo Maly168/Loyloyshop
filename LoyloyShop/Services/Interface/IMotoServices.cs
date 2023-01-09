@@ -11,5 +11,6 @@ namespace LoyloyShop.Services.Interface
         List<Products> GetActiveProduct();
         List<Products> GetSoldOutProduct();
         Products GetProductByPlateNumber(string plateNumber);
+        List<Products> GetProductByCategory(int categoryId);
     }
 }

@@ -1,7 +1,7 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Search";
 }
-@model Products
+@*@model Products
 <div class="container">
   <table class="table table-bordered">
     <thead>
@@ -54,6 +54,47 @@
                 <td>@Model.ModifiedOn</td>
                 <td>@Model.Status</td>
               </tr>
+    </tbody>
+  </table>
+
+</div>*@
+
+<div class="container">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Engine Number</th>
+        <th scope="col">Frame Number</th>
+        <th scope="col">Plate Number</th>
+        <th scope="col">Price</th>
+        <th scope="col">Created On</th>
+        <th scope="col">Modified On</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var prod in (List<Products>)ViewBag.Product)
+            {
+            <tr class="">
+                <td> @prod.Name</td>
+                <td>@prod.EngineNumber</td>
+                <td>@prod.FrameNumber</td>
+                <td>@prod.PlateNumber</td>
+                <td>@prod.PriceBuy</td>
+                <td>@prod.CreatedOn</td>
+                <td>@prod.ModifiedOn</td>
+                <td>@prod.Status</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@prod.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@prod.Id">Details</a>
+                </td>
+              </tr>
+            }
+            <tr>
+                <td colspan="9">Total : @ViewBag.Total $</td>
+            </tr>
     </tbody>
   </table>
 

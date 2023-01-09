@@ -18,9 +18,12 @@ namespace LoyloyShop.Controllers
 
         public IActionResult Index()
         {
-            var product = _motoService.GetMotoInfos();
-            ViewBag.Product = product;
-            ViewBag.Total = product.Sum(p =>p.PriceBuy);
+            //var product = _motoService.GetMotoInfos();
+            //ViewBag.Product = product;
+            //ViewBag.Total = product.Sum(p =>p.PriceBuy);
+            var products = _motoService.GetActiveProduct();
+            ViewBag.Product = products;
+            ViewBag.Total = products.Sum(p => p.PriceBuy);
             return View();
         }
 
@@ -42,9 +45,10 @@ namespace LoyloyShop.Controllers
 
         public IActionResult Search(IFormCollection formValue)
         {
-            var product = _motoService.GetProductByPlateNumber(formValue["search"]);
-            ViewBag.Products = product; 
-            return View(product);
+            var product = _motoService.GetProductByCategory(int.Parse(formValue["CategoryId"]));
+            ViewBag.Product = product;
+            ViewBag.Total = product.Sum(p => p.PriceBuy);
+            return View();
         }
 
         public IActionResult Privacy()
@@ -99,6 +103,8 @@ namespace LoyloyShop.Controllers
             product.Power = formValue["Power"];
             product.PriceBuy = decimal.Parse(formValue["PriceBuy"]);
             product.PriceSell = decimal.Parse(formValue["PriceSell"]);
+            product.CategoryId = int.Parse(formValue["CategoryId"]);
+
             product.Status = int.Parse(formValue["Status"]);
 
             _motoService.UpdateMotoInfo(product);

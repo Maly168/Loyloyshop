@@ -20,7 +20,7 @@ namespace LoyloyShop.Models
         public DateTime CreatedOn { get; set;}
         public DateTime? DateSell { get; set;}
         public DateTime ModifiedOn { get; set; }
-
+        public int? CategoryId { get; set; }
     }
     public class ProductModelEntityConfiguration : IEntityTypeConfiguration<Products>
     {
@@ -46,6 +46,7 @@ namespace LoyloyShop.Models
             builder.Property(p => p.DateSell).HasColumnName("DateSell").HasColumnType("DateTime");
             
             builder.Property(p => p.ModifiedOn).HasColumnName("ModifiedOn").HasColumnType("DateTime");
+            builder.Property(p => p.CategoryId).HasColumnName("CategoryId").HasColumnType("Integer").HasMaxLength(50);
             builder.ToTable("Products");
         }
     }

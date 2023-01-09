@@ -39,6 +39,11 @@ namespace LoyloyShop.Services
             var motos = _dataContext.Products.Where(m =>m.PlateNumber.ToLower() == plateNumber.ToLower()).FirstOrDefault();
             return motos;
         }
+        public List<Products> GetProductByCategory(int categoryId)
+        {
+            var motos = _dataContext.Products.Where(m => m.CategoryId == categoryId && m.Status == 1).ToList();
+            return motos;
+        }
 
         public void StoreMotoInfo(Products product)
         {
