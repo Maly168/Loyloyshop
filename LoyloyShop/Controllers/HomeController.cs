@@ -18,11 +18,9 @@ namespace LoyloyShop.Controllers
 
         public IActionResult Index()
         {
-            //var product = _motoService.GetMotoInfos();
-            //ViewBag.Product = product;
-            //ViewBag.Total = product.Sum(p =>p.PriceBuy);
             var products = _motoService.GetActiveProduct();
             ViewBag.Product = products;
+            ViewBag.TotalPaymentDetail = _motoService.GetTotalPaymentDetails();
             ViewBag.Total = products.Sum(p => p.PriceBuy);
             return View();
         }
@@ -31,6 +29,7 @@ namespace LoyloyShop.Controllers
         {
             var products = _motoService.GetActiveProduct();
             ViewBag.Product = products;
+            ViewBag.TotalPaymentDetail = _motoService.GetTotalPaymentDetails();
             ViewBag.Total = products.Sum(p => p.PriceBuy);
             return View("~/Views/Home/Index.cshtml");
         }
@@ -39,13 +38,29 @@ namespace LoyloyShop.Controllers
             var products = _motoService.GetSoldOutProduct();
             ViewBag.Product = products;
             var total = products.Sum(p => p.PriceSell)  - products.Sum(p => p.PriceBuy);
-            ViewBag.TotalEarning = total;
+            var totalPayment = _motoService.GetTotalPaymentDetails();
+            ViewBag.TotalEarning = total - totalPayment;
             return View("~/Views/Home/SoldOutProduct.cshtml");
         }
 
         public IActionResult Search(IFormCollection formValue)
         {
-            var product = _motoService.GetProductByCategory(int.Parse(formValue["CategoryId"]));
+            var product = new List<Products>();
+            if (formValue["CategoryId"].Any())
+            {
+                product = _motoService.GetProductByCategory(int.Parse(formValue["CategoryId"]));
+            }
+            else if (formValue["dateTo"].Any() && formValue["dateFrom"].Any())
+            {
+                product = _motoService.GetProductByDate(DateTime.Parse(formValue["dateFrom"]), DateTime.Parse(formValue["dateTo"]));
+                ViewBag.Product = product;
+                var total = product.Sum(p => p.PriceSell) - product.Sum(p => p.PriceBuy);
+                var totalPayment = product.Sum(p => p.Detail.Sum(d => d.Payment));
+                ViewBag.TotalEarning = total - totalPayment;
+                return View("~/Views/Home/SoldOutProduct.cshtml");
+            }
+                
+           
             ViewBag.Product = product;
             ViewBag.Total = product.Sum(p => p.PriceBuy);
             return View();
@@ -70,6 +85,26 @@ namespace LoyloyShop.Controllers
         }
 
         [HttpGet]
+        public IActionResult AddDetails(int id)
+        {
+            ViewBag.ProductId = id;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateDetails(Details details)
+        {
+            //ViewBag.Products = product;
+            _motoService.StoreDetails(details);
+
+            var products = _motoService.GetMotoInfos();
+            ViewBag.Product = products;
+            ViewBag.TotalPaymentDetail = _motoService.GetTotalPaymentDetails();
+            ViewBag.Total = products.Sum(p => p.PriceBuy);
+            return View("~/Views/Home/Index.cshtml");
+        }
+
+        [HttpGet]
         public IActionResult Details(int id)
         {
             var product = _motoService.GetMotoInfo(id);
@@ -85,9 +120,12 @@ namespace LoyloyShop.Controllers
 
             var products = _motoService.GetMotoInfos();
             ViewBag.Product = products;
+            ViewBag.TotalPaymentDetail = _motoService.GetTotalPaymentDetails();
             ViewBag.Total = products.Sum(p => p.PriceBuy);
             return View("~/Views/Home/Index.cshtml");
         }
+
+      
 
         [HttpPost]
         public ActionResult Update(IFormCollection formValue)

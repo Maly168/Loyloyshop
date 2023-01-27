@@ -19,6 +19,8 @@
         ZoomerX = 14,
         Cent = 15,
         Icon = 16,
+        Let = 17,
+        Step = 18,
 
     }
 }

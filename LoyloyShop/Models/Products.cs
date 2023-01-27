@@ -21,12 +21,15 @@ namespace LoyloyShop.Models
         public DateTime? DateSell { get; set;}
         public DateTime ModifiedOn { get; set; }
         public int? CategoryId { get; set; }
+        public string? Description { get; set; }
+        public virtual IList<Details> Detail { get; set; }
     }
     public class ProductModelEntityConfiguration : IEntityTypeConfiguration<Products>
     {
         public void Configure(EntityTypeBuilder<Products> builder)
         {
             builder.HasKey(p => p.Id);
+           // builder.HasMany<Details>(p => p.Detail)..HasForeignKey<int>(s => s.CurrentGradeId);
             builder.Property(p => p.Name).HasColumnName("Name").HasColumnType("NVARCHAR").HasMaxLength(50);
             builder.Property(p => p.Type).HasColumnName("Type").HasColumnType("NVARCHAR").HasMaxLength(50);
             builder.Property(p => p.Color).HasColumnName("Color").HasColumnType("NVARCHAR").HasMaxLength(50);
@@ -47,6 +50,9 @@ namespace LoyloyShop.Models
             
             builder.Property(p => p.ModifiedOn).HasColumnName("ModifiedOn").HasColumnType("DateTime");
             builder.Property(p => p.CategoryId).HasColumnName("CategoryId").HasColumnType("Integer").HasMaxLength(50);
+            builder.Property(p => p.Description).HasColumnName("Description").HasColumnType("NVARCHAR").HasMaxLength(500);
+            builder.HasMany(p => p.Detail).WithOne(a => a.Products);
+
             builder.ToTable("Products");
         }
     }

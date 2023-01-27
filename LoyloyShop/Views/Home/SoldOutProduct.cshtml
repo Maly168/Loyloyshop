@@ -3,47 +3,76 @@
 }
 
 <div class="container">
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Engine Number</th>
-        <th scope="col">Frame Number</th>
-        <th scope="col">Plate Number</th>
-        <th scope="col">Price</th>
-        <th scope="col">Sell Price</th>
-        <th scope="col">Earning</th>
-        <th scope="col">Created On</th>
-        <th scope="col">Modified On</th>
-        <th scope="col">Status</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach (var prod in (List<Products>)ViewBag.Product)
-            {
-            <tr class="">
-                <td> @prod.Name</td>
-                <td>@prod.EngineNumber</td>
-                <td>@prod.FrameNumber</td>
-                <td>@prod.PlateNumber</td>
-                <td>@prod.PriceBuy</td>
-                <td>@(prod.PriceSell)</td>
-                <td>@(prod.PriceSell - prod.PriceBuy)</td>
-                <td>@prod.CreatedOn</td>
-                <td>@prod.ModifiedOn</td>
-                <td>@prod.Status</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@prod.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@prod.Id">Details</a>
-                </td>
-              </tr>
-            }
-            <tr>
-                <td colspan="9">Total Earning : @ViewBag.TotalEarning $</td>
-            </tr>
-    </tbody>
+   @using (Html.BeginForm("Search", "Home", FormMethod.Post,  new { @class="form-inline my-3 my-lg-0" }))
+                {
+                  <div class= "col-md-4">
+                      <div class="form-group">
+                          <label for="dateFrom">From Date</label>
+                      <div class="input-group date" id="dateFrom">
+                          <input type="text" class="form-control" name="dateFrom" />
+                           <span class="input-group-addon">
+                           <span class="glyphicon glyphicon-calendar"></span>
+                           </span>
+                        </div>
+                        </div>
+                        <div class="form-group">
+                              <label for="dateTo">To Date</label>
+                              <div class="input-group date" id="dateTo">
+                                   <input type="text" class="form-control" name="dateTo" />
+                                   <span class="input-group-addon">
+                                   <span class="glyphicon glyphicon-calendar"></span>
+                                   </span>
+                            </div>
+                        </div>
+                     </div>
+                     <div class= "col-md-12">
+                            <input type="submit" value="Search"  class="btn btn-outline-success my-2 my-sm-0"/>
+                     </div>
+                }
+    <div class ="row">
+         <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Plate Number</th>
+             <th scope="col">Engine Number</th>
+            <th scope="col">Frame Number</th>
+            <th scope="col">Price</th>
+            <th scope="col">Fixing Price</th>
+            <th scope="col">Sell Price</th>
+            <th scope="col">Earning</th>
+            <th scope="col">Created On</th>
+            <th scope="col">Modified On</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (var prod in (List<Products>)ViewBag.Product)
+                {
+                <tr class="">
+                    <td>@prod.Name</td>
+                    <td>@prod.PlateNumber</td>
+                    <td>@prod.EngineNumber</td>
+                    <td>@prod.FrameNumber</td>
+                    <td>@prod.PriceBuy</td>
+                    <td>@prod.Detail.Sum(d => d.Payment)</td>
+                    <td>@(prod.PriceSell)</td>
+                    <td>@(prod.PriceSell - prod.PriceBuy - prod.Detail.Sum( d =>d.Payment ))</td>
+                    <td>@prod.CreatedOn</td>
+                    <td>@prod.ModifiedOn</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@prod.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@prod.Id">Details</a>
+                    </td>
+                  </tr> 
+                }
+                <tr>
+                    <td colspan="9">Total Earning : @ViewBag.TotalEarning $</td>
+                </tr>
+        </tbody>
   </table>
+    </div>
+ 
  @Html.ActionLink("Create", "AddProduct", "Home")
 
 </div>

@@ -52,7 +52,6 @@ D:\Others\LoyloyShop\LoyloyShop\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\
 D:\Others\LoyloyShop\LoyloyShop\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 D:\Others\LoyloyShop\LoyloyShop\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\Others\LoyloyShop\LoyloyShop\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
-D:\Others\LoyloyShop\LoyloyShop\obj\Debug\net6.0\LoyloyShop.csproj.AssemblyReference.cache
 D:\Others\LoyloyShop\LoyloyShop\obj\Debug\net6.0\LoyloyShop.GeneratedMSBuildEditorConfig.editorconfig
 D:\Others\LoyloyShop\LoyloyShop\obj\Debug\net6.0\LoyloyShop.AssemblyInfoInputs.cache
 D:\Others\LoyloyShop\LoyloyShop\obj\Debug\net6.0\LoyloyShop.AssemblyInfo.cs
@@ -70,3 +69,4 @@ D:\Others\LoyloyShop\LoyloyShop\obj\Debug\net6.0\LoyloyShop.dll
 D:\Others\LoyloyShop\LoyloyShop\obj\Debug\net6.0\ref\LoyloyShop.dll
 D:\Others\LoyloyShop\LoyloyShop\obj\Debug\net6.0\LoyloyShop.pdb
 D:\Others\LoyloyShop\LoyloyShop\obj\Debug\net6.0\LoyloyShop.genruntimeconfig.cache
+D:\Others\LoyloyShop\LoyloyShop\obj\Debug\net6.0\LoyloyShop.csproj.AssemblyReference.cache

@@ -12,5 +12,8 @@ namespace LoyloyShop.Services.Interface
         List<Products> GetSoldOutProduct();
         Products GetProductByPlateNumber(string plateNumber);
         List<Products> GetProductByCategory(int categoryId);
+        decimal GetTotalPaymentDetails();
+        void StoreDetails(Details details);
+        List<Products> GetProductByDate(DateTime dateFrom, DateTime dateTo);
     }
 }
