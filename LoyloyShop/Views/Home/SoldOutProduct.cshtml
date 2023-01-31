@@ -3,26 +3,26 @@
 }
 
 <div class="container">
-   @using (Html.BeginForm("Search", "Home", FormMethod.Post,  new { @class="form-inline my-3 my-lg-0" }))
+   @using (Html.BeginForm("Search", "Home", FormMethod.Post,  new { @class="form-inline my-3 my-lg-0", @runat="server" }))
                 {
                   <div class= "col-md-4">
                       <div class="form-group">
-                          <label for="dateFrom">From Date</label>
-                      <div class="input-group date" id="dateFrom">
-                          <input type="text" class="form-control" name="dateFrom" />
-                           <span class="input-group-addon">
-                           <span class="glyphicon glyphicon-calendar"></span>
-                           </span>
-                        </div>
+                          @*<label for="dateFrom">From Date</label>*@
+                          <div class="input-group date" id="dateFrom">
+                              <input type="text" class="form-control" name="dateFrom" placeholder="Date From" />
+                               <span class="input-group-addon">
+                               <span class="glyphicon glyphicon-calendar"></span>
+                               </span>
+                            </div>
                         </div>
                         <div class="form-group">
-                              <label for="dateTo">To Date</label>
-                              <div class="input-group date" id="dateTo">
-                                   <input type="text" class="form-control" name="dateTo" />
-                                   <span class="input-group-addon">
-                                   <span class="glyphicon glyphicon-calendar"></span>
-                                   </span>
-                            </div>
+                              @*<label for="dateTo">To Date</label>*@
+                                  <div class="input-group date" id="dateTo">
+                                       <input type="text" class="form-control" name="dateTo"  placeholder="Date To"/>
+                                       <span class="input-group-addon">
+                                       <span class="glyphicon glyphicon-calendar"></span>
+                                       </span>
+                                 </div>
                         </div>
                      </div>
                      <div class= "col-md-12">
@@ -55,9 +55,25 @@
                     <td>@prod.EngineNumber</td>
                     <td>@prod.FrameNumber</td>
                     <td>@prod.PriceBuy</td>
-                    <td>@prod.Detail.Sum(d => d.Payment)</td>
+                    <td>
+                            @if (@prod.Detail.Count > 0)
+                            {
+                                @prod.Detail.Sum(d => d.Payment)
+                            }
+
+                    </td>
                     <td>@(prod.PriceSell)</td>
-                    <td>@(prod.PriceSell - prod.PriceBuy - prod.Detail.Sum( d =>d.Payment ))</td>
+                    <td>
+                         @if (@prod.Detail.Count > 0)
+                            {
+                                @(prod.PriceSell - prod.PriceBuy - prod.Detail.Sum( d =>d.Payment ))
+                            }else
+                            {
+                                @(prod.PriceSell - prod.PriceBuy)
+                            }
+
+                     
+                    </td>
                     <td>@prod.CreatedOn</td>
                     <td>@prod.ModifiedOn</td>
                     <td>
