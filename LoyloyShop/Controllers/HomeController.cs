@@ -1,5 +1,6 @@
 ﻿using LoyloyShop.Models;
 using LoyloyShop.Services.Interface;
+using LoyloyShop.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -16,31 +17,36 @@ namespace LoyloyShop.Controllers
             _motoService = motoService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
             var products = _motoService.GetActiveProduct();
             ViewBag.Product = products;
             ViewBag.TotalPaymentDetail = _motoService.GetTotalPaymentDetails();
             ViewBag.Total = products.Sum(p => p.PriceBuy);
-            return View();
+            var productsView = new ProductViewModel
+            {
+                ProductPerPage = 10,
+                Products = products,
+                CurrentPage = page
+            };
+            return View(productsView);
         }
 
-        public IActionResult ActiveProduct()
-        {
-            var products = _motoService.GetActiveProduct();
-            ViewBag.Product = products;
-            ViewBag.TotalPaymentDetail = _motoService.GetTotalPaymentDetails();
-            ViewBag.Total = products.Sum(p => p.PriceBuy);
-            return View("~/Views/Home/Index.cshtml");
-        }
-        public IActionResult SoldOutProduct()
+        public IActionResult SoldOutProduct(int page =1)
         {
             var products = _motoService.GetSoldOutProduct();
             ViewBag.Product = products;
             var total = products.Sum(p => p.PriceSell)  - products.Sum(p => p.PriceBuy);
             var totalPayment = _motoService.GetTotalPaymentDetails();
             ViewBag.TotalEarning = total - totalPayment;
-            return View("~/Views/Home/SoldOutProduct.cshtml");
+
+            var productsView = new ProductViewModel
+            {
+                ProductPerPage = 10,
+                Products = products,
+                CurrentPage = page
+            };
+            return View("~/Views/Home/SoldOutProduct.cshtml", productsView);
         }
 
         public IActionResult Search(IFormCollection formValue)
@@ -52,12 +58,21 @@ namespace LoyloyShop.Controllers
             }
             else if (formValue["dateTo"].Any() && formValue["dateFrom"].Any())
             {
-                product = _motoService.GetProductByDate(DateTime.Parse(formValue["dateFrom"]), DateTime.Parse(formValue["dateTo"]));
+                product = _motoService.GetProductByDate(DateTime.Parse(formValue["dateFrom"]), 
+                    DateTime.Parse(formValue["dateTo"]));
                 ViewBag.Product = product;
                 var total = product.Sum(p => p.PriceSell) - product.Sum(p => p.PriceBuy);
                 var totalPayment = product.Sum(p => p.Detail.Sum(d => d.Payment));
                 ViewBag.TotalEarning = total - totalPayment;
-                return View("~/Views/Home/SoldOutProduct.cshtml");
+
+                var productsView = new ProductViewModel
+                {
+                    ProductPerPage = 50,
+                    Products = product,
+                    CurrentPage = 1
+                };
+
+                return View("~/Views/Home/SoldOutProduct.cshtml", productsView);
             }
                 
            
@@ -94,14 +109,18 @@ namespace LoyloyShop.Controllers
         [HttpPost]
         public ActionResult CreateDetails(Details details)
         {
-            //ViewBag.Products = product;
             _motoService.StoreDetails(details);
-
             var products = _motoService.GetMotoInfos();
             ViewBag.Product = products;
             ViewBag.TotalPaymentDetail = _motoService.GetTotalPaymentDetails();
             ViewBag.Total = products.Sum(p => p.PriceBuy);
-            return View("~/Views/Home/Index.cshtml");
+            var productsView = new ProductViewModel
+            {
+                ProductPerPage = 10,
+                Products = products,
+                CurrentPage = 1
+            };
+            return View("~/Views/Home/Index.cshtml", productsView);
         }
 
         [HttpGet]
@@ -115,14 +134,19 @@ namespace LoyloyShop.Controllers
         [HttpPost]
         public ActionResult Create(Products product)
         {
-            //ViewBag.Products = product;
             _motoService.StoreMotoInfo(product);
 
             var products = _motoService.GetMotoInfos();
             ViewBag.Product = products;
             ViewBag.TotalPaymentDetail = _motoService.GetTotalPaymentDetails();
             ViewBag.Total = products.Sum(p => p.PriceBuy);
-            return View("~/Views/Home/Index.cshtml");
+            var productsView = new ProductViewModel
+            {
+                ProductPerPage = 10,
+                Products = products,
+                CurrentPage = 1
+            };
+            return View("~/Views/Home/Index.cshtml", productsView);
         }
 
       
@@ -150,13 +174,14 @@ namespace LoyloyShop.Controllers
             var products = _motoService.GetMotoInfos();
             ViewBag.Product = products;
             ViewBag.Total = products.Sum(p => p.PriceBuy);
-            return View("~/Views/Home/Index.cshtml");
-        }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var productsView = new ProductViewModel
+            {
+                ProductPerPage = 10,
+                Products = products,
+                CurrentPage = 1
+            };
+            return View("~/Views/Home/Index.cshtml", productsView);
         }
     }
 }

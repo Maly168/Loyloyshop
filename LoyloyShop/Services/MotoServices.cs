@@ -20,7 +20,7 @@ namespace LoyloyShop.Services
 
         public List<Products> GetActiveProduct()
         {
-            var motos = _dataContext.Products.Where(m => m.Status == 1).ToList();
+            var motos = _dataContext.Products.Where(m => m.Status == 1).OrderBy(p => p.CreatedOn).ToList();
            
             return motos;
         }

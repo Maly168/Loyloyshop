@@ -1,76 +1,16 @@
 ﻿@{
-    ViewData["Title"] = "Search";
+    ViewData["Title"] = "Search Product";
 }
-@*@model Products
-<div class="container">
-  <table class="table table-bordered">
+
+
+  <table class=" table-responsive table table-bordered">
     <thead>
       <tr>
         <th scope="col">Name</th>
-        <th scope="col">Type</th>
-        <th scope="col">Color</th>
-        <th scope="col">Engine Number</th>
-        <th scope="col">Frame Number</th>
-        <th scope="col">Plate Number</th>
-        <th scope="col">Made Year</th>
-        <th scope="col">Power</th>
-        <th scope="col">Price</th>
-        <th scope="col">Price-Sell</th>
-       
-        @{
-                if (Model.PriceSell != 0)
-                {
-                    <th scope="col">Earning</th>
-                }
-
-            }
-        <th scope="col">Created On</th>
-        <th scope="col">Modified On</th>
-        <th scope="col">Status</th>
-      </tr>
-    </thead>
-    <tbody>
-    
-            <tr class="info">
-                <td>@Model.Name</td>
-                <td>@Model.Type</td>
-                <td>@Model.Color</td>
-                <td>@Model.EngineNumber</td>
-                <td>@Model.FrameNumber</td>
-                <td>@Model.PlateNumber</td>
-                <td>@Model.MadeYear</td>
-               
-                <td>@Model.Power</td>
-                <td>@Model.PriceBuy</td>
-                <td>@Model.PriceSell</td>
-                    @{
-                        if (Model.PriceSell != 0)
-                        {
-                          <td> @(Model.PriceSell - Model.PriceBuy)</td>
-                        }
-
-                    }
-                <td>@Model.CreatedOn</td>
-                <td>@Model.ModifiedOn</td>
-                <td>@Model.Status</td>
-              </tr>
-    </tbody>
-  </table>
-
-</div>*@
-
-<div class="container">
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Engine Number</th>
-        <th scope="col">Frame Number</th>
         <th scope="col">Plate Number</th>
         <th scope="col">Price</th>
+         <th scope="col">Fixing Price</th>
         <th scope="col">Created On</th>
-        <th scope="col">Modified On</th>
-        <th scope="col">Status</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -79,13 +19,16 @@
             {
             <tr class="">
                 <td> @prod.Name</td>
-                <td>@prod.EngineNumber</td>
-                <td>@prod.FrameNumber</td>
                 <td>@prod.PlateNumber</td>
-                <td>@prod.PriceBuy</td>
+                <td>@prod.PriceBuy $</td>
+                <td>
+                            @if (@prod.Detail.Count > 0)
+                            {
+                                @prod.Detail.Sum(d => d.Payment) 
+                            }
+                            $
+                    </td>
                 <td>@prod.CreatedOn</td>
-                <td>@prod.ModifiedOn</td>
-                <td>@prod.Status</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@prod.Id">Edit</a> |
                     <a asp-action="Details" asp-route-id="@prod.Id">Details</a>
@@ -93,9 +36,7 @@
               </tr>
             }
             <tr>
-                <td colspan="9">Total : @ViewBag.Total $</td>
+                <td colspan="5">Total : @ViewBag.Total $</td>
             </tr>
     </tbody>
   </table>
-
-</div>

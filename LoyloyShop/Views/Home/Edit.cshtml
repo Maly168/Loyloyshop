@@ -1,7 +1,7 @@
 ﻿@using LoyloyShop.Enum
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+@{
+    ViewData["Title"] = "Update Product";
+}
 
  @{
 
@@ -55,7 +55,8 @@
                 </div>
                  <div class="form-group col-md-6">
                      <label for="Status">Status</label>
-                     @Html.TextBoxFor(m => m.Status , new {@class = "form-control" })
+                     @Html.DropDownList("Status", Html.GetEnumSelectList<StatusEnum>(), "Status",new { @class = "form-control" })
+
                 </div>
                  <div class="form-group col-md-6">
                      <label for="Price buy">Category</label>

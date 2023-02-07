@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "UifWT+S3Oirc3x2aoK72EVrjESCq3QnBQlYH6jygNwo=",
+  "Hash": "TkuBWYceYYbF+1GZbuqapxqsa4Pl0KLL7iRSTV8LzO0=",
   "Source": "LoyloyShop",
   "BasePath": "_content/LoyloyShop",
   "Mode": "Default",
@@ -117,6 +117,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\Others\\LoyloyShop\\LoyloyShop\\wwwroot\\js\\bootstrap.bundle.min.js",
+      "SourceId": "LoyloyShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Others\\LoyloyShop\\LoyloyShop\\wwwroot\\",
+      "BasePath": "_content/LoyloyShop",
+      "RelativePath": "js/bootstrap.bundle.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\bootstrap.bundle.min.js"
     },
     {
       "Identity": "D:\\Others\\LoyloyShop\\LoyloyShop\\wwwroot\\js\\bootstrap-datetimepicker.js",

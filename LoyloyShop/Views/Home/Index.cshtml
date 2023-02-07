@@ -2,8 +2,8 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="container">
-  <table class="table table-bordered">
+
+  <table class="table-responsive table table-bordered">
     <thead>
       <tr>
         <th scope="col">Name</th>
@@ -19,28 +19,30 @@
       </tr>
     </thead>
     <tbody>
-      @foreach (var prod in (List<Products>)ViewBag.Product)
+      @foreach (var prod in (List<Products>)Model.PaginatedProducts())
             {
             <tr class="">
                 <td> @prod.Name</td>
                 <td>@prod.PlateNumber</td>
                 <td>@prod.EngineNumber</td>
                 <td>@prod.FrameNumber</td>
-                <td>@prod.PriceBuy</td>
+                <td>@prod.PriceBuy $</td>
                 <td>
                     @if (prod.Detail != null)
                         {
                             @(prod.Detail.Sum(d => d.Payment))
                         }   
+                        $
                 </td>
                 <td>
                         @if (prod.Detail != null)
                         {
-                            @(prod.PriceBuy + prod.Detail.Sum(d => d.Payment))
+                            @(prod.PriceBuy + prod.Detail.Sum(d => d.Payment)) 
                         } else
                         {
                             @prod.PriceBuy
                         }
+                        $
                     </td>
                 <td>@prod.CreatedOn</td>
                 <td>@prod.ModifiedOn</td>
@@ -59,5 +61,11 @@
             </tr>
     </tbody>
   </table>
- @Html.ActionLink("Create", "AddProduct", "Home")
-</div>
+  <ul class="pagination">  
+        @for (int i = 1; i <= Model.PageCount(); i++)  
+        {  
+            <li class="@(i == Model.CurrentPage ? "page-item active" : "page-item")">  
+                <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>  
+            </li>  
+        }  
+    </ul> 
