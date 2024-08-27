@@ -21,6 +21,16 @@
         Icon = 16,
         Let = 17,
         Step = 18,
-        Dio = 19
+        Dio = 19,
+        GTRGirno = 20,
+        PCX = 21,
+        Beat = 22,
+        CBR = 23,
+        FTR = 24,
+        Moove  = 25,
+        Wave = 26,
+        CalypsoOri = 27,
+        GPX     = 28,
+        Other =     29,
     }
 }

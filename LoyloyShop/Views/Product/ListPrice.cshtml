@@ -1,0 +1,72 @@
+﻿@{
+   Layout = null;
+    ViewData["Title"] = "List Price";
+}
+@using LoyloyShop.Enum
+@using LoyloyShop.Models
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LoyloyShop</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/bootstrap-datetimepicker.min.css" asp-append-version="true" />
+    
+    <link rel="stylesheet" href="~/LoyloyShop.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container">
+        <main role="main" class="pb-3 pt-4">
+        
+        @using (Html.BeginForm("SearchByPlateNumber", "Product", FormMethod.Post,  new { @class="d-flex" }))
+                {
+                    <p>Search by Plate Number</p>
+                     <div class="form-row">
+                         <div class="form-group col-md-12">
+                              <input type = "text" name="plateNumber" class = "form-control">
+                         </div>
+                     </div>
+                      <div class="form-row">
+                         <div class="form-group col-md-6">
+                                 <input type="submit" value="Search"  class="btn btn-primary"/>
+                         </div>
+                         </div>
+                }
+         <p class="badge badge-light">Total Product: @Model.Products.Count</p>
+         <table class="table-responsive table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Plate Number</th>
+                <th scope="col">Year</th>
+                <th scope="col">SellingPrice</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach (var prod in (List<Products>)Model.PaginatedProducts())
+                    {
+                    <tr class="">
+                        <td> @prod.Name</td>
+                        <td>@prod.PlateNumber</td>
+                        <td>@prod.MadeYear</td>
+                        <td>@prod.SellingPrice $</td>
+                      </tr>
+                    }
+            </tbody>
+          </table>
+          <ul class="pagination">  
+                @for (int i = 1; i <= Model.PageCount(); i++)  
+                {  
+                    <li class="@(i == Model.CurrentPage ? "page-item active" : "page-item")">  
+                        <a class="page-link" href="@Url.Action("ListPrice", new { page = i })">@i</a>  
+                    </li>  
+                }  
+            </ul> 
+            </main>
+    </div>
+</body>
+</html>
+ 

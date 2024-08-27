@@ -12,12 +12,24 @@ namespace LoyloyShop.ViewModel
         {
             return Convert.ToInt32(Math.Ceiling(Products.Count() / (double)ProductPerPage));
         }
-
+        //public int AllProducts()
+        //{ 
+        //    return Products.Count();
+        //}
         public List<Products> PaginatedProducts()
         {
             int start = (CurrentPage - 1) * ProductPerPage;
             return Products
-                .OrderBy(b => b.Id).Skip(start).Take(ProductPerPage).ToList();
+                .Skip(start).Take(ProductPerPage).ToList();
+
+               // .OrderBy(b => b.Id).Skip(start).Take(ProductPerPage).ToList();
         }
+
+        public int? BranchId { get; set; }
+        public int? CategoryId { get; set; }
+        public int? Status { get; set; }
+
+        public string? DateFrom { get; set; }
+        public string? DateTo { get; set; }
     }
 }

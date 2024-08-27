@@ -1,0 +1,4 @@
+ALTER TABLE [dbo].[Products]
+ADD [BranchId] int default 1;
+
+Update [dbo].[Products] SET BranchId =1

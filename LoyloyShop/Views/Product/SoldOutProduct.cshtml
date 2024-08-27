@@ -1,0 +1,96 @@
+﻿@{
+    ViewData["Title"] = "Soldout Page";
+}
+@using LoyloyShop.Enum
+@using LoyloyShop.Models
+
+   @using (Html.BeginForm("TestSearch", "Product", FormMethod.Get,  new { @class="form-inline my-3 my-lg-0", @runat="server" }))
+                {
+                     <div class= "col-md-3">
+                         <div class="form-group">
+                                 @Html.DropDownList("BranchId", Html.GetEnumSelectList<BranchesEnum>(), "Branches",new { @class = "form-control me-2" })
+                         </div>    
+                     </div>
+
+
+                  <div class= "col-md-3">
+                      <div class="form-group">
+                          <input type="text"  data-date-format="yyyy-mm-dd" id="dateFrom" name="dateFrom" placeholder="Date From"  class="form-control" >
+                        </div>
+                    </div>
+
+                    <div class= "col-md-3">
+                        <div class="form-group">
+
+                              <input type="text" data-date-format="yyyy-mm-dd" id="dateTo"  class="form-control" name="dateTo"  placeholder="Date To"  >
+                        </div>
+
+                     </div>
+
+                     <div class= "col-md-3">
+                            <input type="submit" value="Search"  class="btn btn-outline-success my-2 my-sm-0"/>
+                     </div>
+                }
+              
+    <div class ="row">
+         <table class="table-responsive table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Plate Number</th>
+            <th scope="col">Price</th>
+            <th scope="col">Fixing Price</th>
+            <th scope="col">Sell Price</th>
+            <th scope="col">Earning</th>
+            <th scope="col">Created On</th>
+            <th scope="col">Modified On</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (var prod in (List<Products>)Model.PaginatedProducts())
+                {
+                <tr class="">
+                    <td>@prod.Name</td>
+                    <td>@prod.PlateNumber</td>
+                    <td>@prod.PriceBuy $</td>
+                    <td>
+                            @if (@prod.Detail.Count > 0)
+                            {
+                                @prod.Detail.Sum(d => d.Payment)
+                            }
+                    </td>
+                    <td>@(prod.PriceSell) $</td>
+                    <td>
+                         @if (@prod.Detail.Count > 0)
+                            {
+                                @(prod.PriceSell - prod.PriceBuy - prod.Detail.Sum( d =>d.Payment ))
+                            }else
+                            {
+                                @(prod.PriceSell - prod.PriceBuy)
+                            }
+
+                     $
+                    </td>
+                    <td>@prod.CreatedOn.ToString("dd-M-yyyy")</td>
+                    <td>@prod.ModifiedOn.ToString("dd-M-yyyy")</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@prod.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@prod.Id">Details</a>
+                    </td>
+                  </tr> 
+                }
+                <tr>
+                    <td colspan="7">Total Earning : @ViewBag.TotalEarning $</td>
+                </tr>
+        </tbody>
+  </table>
+    </div>
+  <ul class="pagination">  
+        @for (int i = 1; i <= Model.PageCount(); i++)  
+        {  
+            <li class="@(i == Model.CurrentPage ? "page-item active" : "page-item")">  
+                <a class="page-link" href="@Url.Action("SoldOutProduct", new {dateFrom = Model.DateFrom, dateTo = Model.DateTo, branchId = Model.BranchId, page = i })">@i</a>  
+            </li>  
+        }  
+    </ul>

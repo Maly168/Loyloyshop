@@ -1,71 +1,82 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+     ViewData["Title"] = "Login";
+      @model Login
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LoyloyShop</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/bootstrap-datetimepicker.min.css" asp-append-version="true" />
+    
+    <link rel="stylesheet" href="~/LoyloyShop.styles.css" asp-append-version="true" />
+</head>
+<body>
+     <div class="container">
+        <main role="main" class="pb-3">
+            <section class="vh-100" style="">
+              <div class="container py-5 h-50">
+                <div class="row d-flex justify-content-center align-items-center h-50">
+                  <div class="col col-xl-10">
+                        <img src="~/img/logo.jpg"
+                            alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+                    <div class="card" style="border-radius: 1rem;">
+                      <div class="row g-0">
+                        <div class="col-md-2 col-lg-2 d-none d-md-block">
+                          @*<img src="~/img/bg.jpg"
+                            alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />*@
+                        </div>
+                        <div class="col-md-8 col-lg-8 d-flex align-items-center">
+                          <div class="card-body p-4 p-lg-5 text-black">
+                                @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+                                {
+                                        <div class="d-flex align-items-center mb-3 pb-1">
+                                            <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+                                           @* <span class="h1 fw-bold mb-0">Logo</span>*@
+                                          </div>   
+                                          <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+                                            <div class="form-outline mb-4">
+                                                   @Html.TextBoxFor(l => l.Username , new {@class = "form-control form-control-lg" })
+                                                    <label for="Name" class="form-label">Username</label>
+                                              </div>
+                                               <div class="form-outline mb-4">
+                                                   @Html.PasswordFor(l => l.Password , new {@class = "form-control form-control-lg" })
+                                                    <label class="form-label" for="form2Example27">Password</label>
+                                               </div>
+                                                <div class="pt-1 mb-4">
+                                                    <input type="submit" value="Login"  class="btn btn-primary btn-lg btn-block"/>
+                                                    
 
+                                                </div>
+                                                @if (ViewBag.Messages != null)
+                                                {
+                                                    <div class="alert alert-warning" role="alert">
+                                                      @ViewBag.Messages
+                                                    </div>
+                                                }
+                                             <a class="small text-muted" href="#!">Forgot password?</a>
+                                              <a href="#!" class="small text-muted">Terms of use.</a>
+                                              <a href="#!" class="small text-muted">Privacy policy</a>
+                                }
+                          </div>
+                        </div>
+                         <div class="col-md-2 col-lg-2 d-none d-md-block"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+        </main>
+      </div>
+</body>
+</html>
 
-  <table class="table-responsive table table-bordered">
-    <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Plate Number</th>
-        <th scope="col">Engine Number</th>
-        <th scope="col">Frame Number</th>
-        <th scope="col">Price</th>
-         <th scope="col">Fixing Price</th>
-         <th scope="col">Total Price</th>
-        <th scope="col">Created On</th>
-        <th scope="col">Modified On</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach (var prod in (List<Products>)Model.PaginatedProducts())
-            {
-            <tr class="">
-                <td> @prod.Name</td>
-                <td>@prod.PlateNumber</td>
-                <td>@prod.EngineNumber</td>
-                <td>@prod.FrameNumber</td>
-                <td>@prod.PriceBuy $</td>
-                <td>
-                    @if (prod.Detail != null)
-                        {
-                            @(prod.Detail.Sum(d => d.Payment))
-                        }   
-                        $
-                </td>
-                <td>
-                        @if (prod.Detail != null)
-                        {
-                            @(prod.PriceBuy + prod.Detail.Sum(d => d.Payment)) 
-                        } else
-                        {
-                            @prod.PriceBuy
-                        }
-                        $
-                    </td>
-                <td>@prod.CreatedOn</td>
-                <td>@prod.ModifiedOn</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@prod.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@prod.Id">Details</a>
-                </td>
-              </tr>
-            }
-            <tr>
-                <td colspan="4"></td>
-                <td>Total original buying: @ViewBag.Total $</td>
-                 <td>Total Fixing : @ViewBag.TotalPaymentDetail $</td>
-                 <td>Total  : @(ViewBag.Total + ViewBag.TotalPaymentDetail) $</td>
-                 <td colspan = "3"></td>
-            </tr>
-    </tbody>
-  </table>
-  <ul class="pagination">  
-        @for (int i = 1; i <= Model.PageCount(); i++)  
-        {  
-            <li class="@(i == Model.CurrentPage ? "page-item active" : "page-item")">  
-                <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>  
-            </li>  
-        }  
-    </ul> 

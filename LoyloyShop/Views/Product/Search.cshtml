@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "Search Product";
+}
+@using LoyloyShop.Models
+@using LoyloyShop.Enum
+ @using (Html.BeginForm("SearchByBranch", "Product", FormMethod.Get,  new { @class="d-flex" }))
+    {
+            @Html.DropDownList("BranchId", Html.GetEnumSelectList<BranchesEnum>(), "Search by Branch",new { @class = "form-control me-2" })
+            @Html.DropDownList("Status", Html.GetEnumSelectList<StatusEnum>(), "Status",new { @class = "form-control me-2" })
+                  
+        <input type="submit" value="Search"  class="btn btn-outline-success"/>
+    }
+  <table class="table-responsive table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Plate Number</th>
+        <th scope="col">Price</th>
+         <th scope="col">Fixing</th>
+         <th scope="col">Total Price</th>
+        <th scope="col">Created On</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var prod in (List<Products>)Model.PaginatedProducts())
+            {
+            <tr class="">
+                <td> @prod.Name</td>
+                <td>@prod.PlateNumber</td>
+                <td>@prod.PriceBuy $</td>
+                <td>
+                    @if (prod.Detail != null)
+                        {
+                            @(prod.Detail.Sum(d => d.Payment))
+                        }   
+                        $
+                </td>
+                <td>
+                        @if (prod.Detail != null)
+                        {
+                            @(prod.PriceBuy + prod.Detail.Sum(d => d.Payment)) 
+                        } else
+                        {
+                            @prod.PriceBuy
+                        }
+                        $
+                    </td>
+                <td>@prod.CreatedOn.ToString("dd-M-yyyy")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@prod.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@prod.Id">Details</a>
+                </td>
+              </tr>
+            }
+            <tr>
+                <td colspan="2"></td>
+                <td>@ViewBag.Total $</td>
+                 <td>@ViewBag.TotalPaymentDetail $</td>
+                 <td>@(ViewBag.Total + ViewBag.TotalPaymentDetail) $</td>
+                 <td colspan = "3"></td>
+            </tr>
+    </tbody>
+  </table>
+
+  <ul class="pagination">  
+        @for (int i = 1; i <= Model.PageCount(); i++)  
+        {  
+            <li class="@(i == Model.CurrentPage ? "page-item active" : "page-item")">  
+                <a class="page-link" href="@Url.Action("SearchByBranch", new { branchId = Model.BranchId, status = Model.Status,page = i })">@i</a>  
+            </li>  
+        }  
+    </ul> 

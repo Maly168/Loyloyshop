@@ -15,13 +15,17 @@ namespace LoyloyShop.DbContexst
         public Microsoft.EntityFrameworkCore.DbSet<Products> Products { get; set; }
         public Microsoft.EntityFrameworkCore.DbSet<Details> Details { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // connect to sql server with connection string from app settings
-            options.UseLazyLoadingProxies();
-            options.UseSqlServer(Configuration.GetConnectionString("loyloyshopdb"));
+            optionsBuilder.UseLazyLoadingProxies();
+            optionsBuilder.UseSqlServer(
+                    Configuration.GetConnectionString("loyloyshopdb"),
+                    options => options.EnableRetryOnFailure()
+                );
+           
             //, b => b.MigrationsAssembly("CountryPublicHolidayWebApi")
-           // options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            // options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

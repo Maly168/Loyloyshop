@@ -10,10 +10,16 @@ namespace LoyloyShop.Services.Interface
         Products GetMotoInfo(int productId);
         List<Products> GetActiveProduct();
         List<Products> GetSoldOutProduct();
-        Products GetProductByPlateNumber(string plateNumber);
+        List<Products> GetProductByPlateNumber(string plateNumber);
         List<Products> GetProductByCategory(int categoryId);
-        decimal GetTotalPaymentDetails();
+        decimal GetTotalPaymentDetails(List<Products> products);
         void StoreDetails(Details details);
-        List<Products> GetProductByDate(DateTime dateFrom, DateTime dateTo);
+        List<Products> GetProductByDate(DateTime dateFrom, DateTime dateTo, int branchId);
+        List<Products> GetBookingProduct();
+
+        List<Products> GetSoldOutProduct(string plateNumber);
+        string GetCategoryName(int categoryId);
+
+        List<Products> GetProductByBranch(int branchId, int status);
     }
 }

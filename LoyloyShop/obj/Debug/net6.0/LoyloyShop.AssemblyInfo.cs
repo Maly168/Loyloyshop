@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LoyloyShop")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2417e8962d54d2ab032beee273d7b05749481571")]
 [assembly: System.Reflection.AssemblyProductAttribute("LoyloyShop")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LoyloyShop")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

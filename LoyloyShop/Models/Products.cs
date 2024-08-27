@@ -16,11 +16,13 @@ namespace LoyloyShop.Models
         public string Power { get; set; }
         public decimal PriceBuy { get; set; }
         public decimal? PriceSell { get; set; }
+        public decimal? SellingPrice { get; set; }
         public int Status { get; set; }
         public DateTime CreatedOn { get; set;}
         public DateTime? DateSell { get; set;}
         public DateTime ModifiedOn { get; set; }
         public int? CategoryId { get; set; }
+        public int? BranchId { get; set; }
         public string? Description { get; set; }
         public virtual IList<Details> Detail { get; set; }
     }
@@ -43,6 +45,7 @@ namespace LoyloyShop.Models
             builder.Property(p => p.PriceBuy).HasColumnName("PriceBuy").HasColumnType("Decimal").HasMaxLength(50);
 
             builder.Property(p => p.PriceSell).HasColumnName("PriceSell").HasColumnType("Decimal").HasMaxLength(50);
+            builder.Property(p => p.SellingPrice).HasColumnName("SellingPrice").HasColumnType("Decimal").HasMaxLength(50);
             builder.Property(p => p.Status).HasColumnName("Status").HasColumnType("Integer").HasMaxLength(50);
 
             builder.Property(p => p.CreatedOn).HasColumnName("CreatedOn").HasColumnType("DateTime");
@@ -50,6 +53,7 @@ namespace LoyloyShop.Models
             
             builder.Property(p => p.ModifiedOn).HasColumnName("ModifiedOn").HasColumnType("DateTime");
             builder.Property(p => p.CategoryId).HasColumnName("CategoryId").HasColumnType("Integer").HasMaxLength(50);
+            builder.Property(p => p.BranchId).HasColumnName("BranchId").HasColumnType("Integer").HasMaxLength(50);
             builder.Property(p => p.Description).HasColumnName("Description").HasColumnType("NVARCHAR").HasMaxLength(500);
             builder.HasMany(p => p.Detail).WithOne(a => a.Products);
 

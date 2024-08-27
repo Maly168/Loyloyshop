@@ -21,6 +21,18 @@ D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\Microsoft.Identity
 D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\Microsoft.IdentityModel.Tokens.dll
 D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\Microsoft.Win32.SystemEvents.dll
+D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\PdfSharp.Charting.dll
+D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\PdfSharp.Quality.dll
+D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\PdfSharp.Snippets.dll
+D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\PdfSharp.System.dll
+D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\PdfSharp.WPFonts.dll
+D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\PdfSharp.dll
+D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\PdfSharpCore.dll
+D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\HtmlRenderer.Core.dll
+D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\HtmlRenderer.PdfSharp.Core.dll
+D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\SixLabors.Core.dll
+D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\SixLabors.Fonts.dll
+D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\SixLabors.ImageSharp.dll
 D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\System.CodeDom.dll
 D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\System.Configuration.ConfigurationManager.dll
 D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\System.Data.SqlClient.dll
@@ -30,6 +42,8 @@ D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\System.Runtime.Cac
 D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\System.Security.Cryptography.ProtectedData.dll
 D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\System.Security.Permissions.dll
 D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\System.Windows.Extensions.dll
+D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\de\PdfSharp.Charting.resources.dll
+D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\de\PdfSharp.resources.dll
 D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 D:\Others\LoyloyShop\LoyloyShop\obj\Release\net6.0\PubTmp\Out\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll

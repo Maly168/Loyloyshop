@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/bootstrap-datetimepicker.min.css" asp-append-version="true" />
+    @*<link rel="stylesheet" href="~/css/bootstrap-datetimepicker.min.css" asp-append-version="true" />*@
+    <link rel="stylesheet" href="~/css/datepicker.css" asp-append-version="true" />
+
     
     <link rel="stylesheet" href="~/LoyloyShop.styles.css" asp-append-version="true" />
 </head>
@@ -23,24 +25,41 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  @Html.ActionLink("Active Products", "Index", "Home", null,  new {@class = "nav-link" })
+                  @Html.ActionLink("Active Products", "Index", "Product", null,  new {@class = "nav-link" })
                 </li>
                 <li class="nav-item">
-                  @Html.ActionLink("SoldOut", "SoldOutProduct", "Home", null, new {@class = "nav-link" })
+                  @Html.ActionLink("SoldOut", "SoldOutProduct", "Product", null, new {@class = "nav-link" })
                 </li>
                 <li class="nav-item">
-                  @Html.ActionLink("Add Product", "AddProduct", "Home", null, new {@class = "nav-link" })
+                  @Html.ActionLink("Add Product", "AddProduct", "Product", null, new {@class = "nav-link" })
+                </li>
+                 <li class="nav-item">
+                  @Html.ActionLink("Booking", "GetBooking", "Product", null, new {@class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                  @Html.ActionLink("PriceListing", "ListPrice", "Product", null, new {@class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                  @Html.ActionLink("Search SoldOut", "SearchSoldOutByPlateNumber", "Product", null, new {@class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                  @Html.ActionLink("Calculation", "Index", "CalculationRate", null, new {@class = "nav-link" })
+                </li>
+                 <li class="nav-item">
+                  @Html.ActionLink("Report", "Index", "Report", null, new {@class = "nav-link" })
                 </li>
                 <li class="nav-item">
                   <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                 </li>
               </ul>
-              @using (Html.BeginForm("Search", "Home", FormMethod.Post,  new { @class="d-flex" }))
+              @using (Html.BeginForm("SearchByCategory", "Product", FormMethod.Get,  new { @class="d-flex" }))
                 {
                      @Html.DropDownList("CategoryId", Html.GetEnumSelectList<CategoryEnum>(), "Search by category",new { @class = "form-control me-2" })
                   
                   <input type="submit" value="Search"  class="btn btn-outline-success"/>
                 }
+
+              
             </div>
           </div>
 </nav>
@@ -63,15 +82,18 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/bootstrap-datetimepicker.min.js" asp-append-version="true"></script>
+
+    <script src="~/js/bootstrap-datepicker.js" asp-append-version="true"></script>
+    @*<script src="~/js/bootstrap-datetimepicker.min.js" asp-append-version="true"></script>*@
     <script src="~/js/bootstrap.bundle.min.js"></script>
   
     @await RenderSectionAsync("Scripts", required: false)
 
       <script type="text/javascript">
          $(function () {
-             $('#dateFrom').datetimepicker();
-             $('#dateTo').datetimepicker();
+             $('#dateFrom').datepicker();
+             $('#dateTo').datepicker();
+             $('#dateSoldOut').datepicker();
          });
       </script>
 </body>

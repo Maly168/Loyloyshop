@@ -1,0 +1,90 @@
+﻿@using LoyloyShop.Enum
+@using LoyloyShop.Models
+@{
+    ViewData["Title"] = "Update Booking";
+}
+
+ @{
+
+    @model Products
+    @using (Html.BeginForm("Update", "Product", FormMethod.Post))
+        {
+          <input type="hidden" asp-for="Id" value="@Model.Id" />
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                     <label for="Name">Name</label>
+                     @Html.TextBoxFor(m => m.Name , new {@class = "form-control" })
+                </div>
+                <div class="form-group col-md-3">
+                     <label for="Type">Type</label>
+                     @Html.TextBoxFor(m => m.Type , new {@class = "form-control" })
+                </div>
+                 <div class="form-group col-md-3">
+                     <label for="Type">Color</label>
+                     @Html.TextBoxFor(m => m.Color , new {@class = "form-control" })
+                </div>
+
+                <div class="form-group col-md-6">
+                     <label for="Engine Number">Engine Number</label>
+                     @Html.TextBoxFor(m => m.EngineNumber , new {@class = "form-control" })
+                </div>
+                 <div class="form-group col-md-6">
+                     <label for="Frame Number">Frame Number</label>
+                     @Html.TextBoxFor(m => m.FrameNumber , new {@class = "form-control" })
+                </div>
+
+                <div class="form-group col-md-6">
+                     <label for="Plate Number">Plate Number</label>
+                     @Html.TextBoxFor(m => m.PlateNumber , new {@class = "form-control" })
+                </div>
+                 <div class="form-group col-md-6">
+                     <label for="Made Year">Made Year</label>
+                     @Html.TextBoxFor(m => m.MadeYear , new {@class = "form-control" })
+                </div>
+                 <div class="form-group col-md-6">
+                     <label for="Power">Power</label>
+                     @Html.TextBoxFor(m => m.Power , new {@class = "form-control" })
+                </div>
+                 <div class="form-group col-md-6">
+                     <label for="Price buy">Price Buy</label>
+                     @Html.TextBoxFor(m => m.PriceBuy , new {@class = "form-control" })
+                </div>
+                <div class="form-group col-md-6">
+                     <label for="Price Sell">Price Sell</label>
+                     @Html.TextBoxFor(m => m.PriceSell , new {@class = "form-control" })
+                </div>
+                 <div class="form-group col-md-6">
+                     <label for="Selling Price"> Selling Price</label>
+                     @Html.TextBoxFor(m => m.SellingPrice , new {@class = "form-control" })
+                </div>
+                 <div class="form-group col-md-6">
+                     <label for="Description">Description</label>
+                     @Html.TextAreaFor(m => m.Description , new {@class = "form-control" })
+                </div>
+                 <div class="form-group col-md-6">
+                     <label for="Status">Status</label>
+                     @Html.DropDownList("Status", Html.GetEnumSelectList<StatusEnum>(), "Status",new { @class = "form-control" })
+
+                </div>
+                 <div class="form-group col-md-6">
+                     <label for="Price buy">Category</label>
+                     @Html.DropDownList("CategoryId", Html.GetEnumSelectList<CategoryEnum>(), "Category",new { @class = "form-control" })
+                </div>
+                 <div class="form-group col-md-6">
+                     <label for="Price buy">Category</label>
+                     @Html.DropDownList("BranchId", Html.GetEnumSelectList<BranchesEnum>(), "Branch",new { @class = "form-control" })
+                </div>
+
+                 <div class="form-group col-md-6">
+                     <label for="Date SoldOut">SoldOut Date</label>
+                     <input type="text"  data-date-format="yyyy-mm-dd" id="dateSoldOut" name="dateSell" class="form-control" value= @Model.DateSell?.ToString("yyyy-M-dd") />
+                </div>
+                <div class="form-group col-md-12">
+                    <input type="submit" value="Submit Form"  class="btn btn-primary"/>
+                </div>
+            </div>
+            <a asp-action="AddDetails" asp-route-id="@Model.Id">AddDetails</a>
+        }
+
+}
